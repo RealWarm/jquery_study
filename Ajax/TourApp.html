@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TourApp</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.css">
+
+    <!-- 필요한 jQuery / jQuery-migrate / jQuery-mobile lib 설정 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.1.0/jquery-migrate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            // 1. aJax로 tour1.xml 자원파일 로딩
+            $.ajax({
+                url: 'resources/tour22.xml',
+                type: 'get',
+                // dataType: 'xml',
+
+
+                // AJAX Event methods
+                success: function (xmlDoc, params) {
+                    console.log('- success invoked.');
+                    console.log('\t+ params:', params);
+                    console.log('\t+ xmlDoc:', xmlDoc);
+
+                    // console.log('- xmlDoc:', xmlDoc);
+                    
+                    // 1-1. 가져온 XML 문서를 파싱하여,
+                    // 관광지 정보를 모두 얻어내어, HTML바인딩 수행
+                    count = $(xmlDoc).find('attraction').size();
+                    doc = xmlDoc;
+
+                    displayTour();  // 외부함수 호출: 컨텐츠 생성
+                },
+                error: function (XHR) {
+                    console.log('- error invoked.');
+                    console.log('\t+ params:', XHR);
+
+                    console.log('\t+ status:', XHR.status);
+                    console.log('\t+ statusText:', XHR.statusText);
+                    console.log('\t+ responseText:', XHR.responseText);
+
+                    $('#attractionListArea').html('잠시 오류가 발생하였습니다');
+
+                },
+                beforeSend: function (XHR) {
+                    console.log('- beforeSend invoked.');
+                    console.log('\t+ XHR:', XHR);
+                    
+                },
+                complete: function (XHR) {
+                    console.log('- complete invoked.');
+                    console.log('\t+ XHR:', XHR);
+                }
+            }); // $.ajax
+
+            function displayTour() {
+                var tagList='';
+
+                var country = ''
+                var name = '';
+                var location = '';
+                var picture = '';
+
+                tagList = '<li data-role="list-divider">관광지 목록</li>';
+
+                if(count > 0) { // 1개 이상의 attraction있다면,
+                    
+                    for(var i=0;i<count;i++) {
+                        $record = $(doc).find('attraction').eq(i);
+                        // console.log('- $record:', $record);
+
+                        country = $record.attr('country');
+                        name = $record.find('name').text();
+                        location = $record.find('location').text();
+                        picture = $record.find('picture').text();
+
+                        tagList += `\n<li>\n\t<a href='#'>\n\t\t<img src='${picture}'>`;
+                        tagList += `\n\t\t<p class='ul-li-aside'>${country}</p>`;
+                        tagList += `\n\t\t<h2>${name}</h2>`;
+                        tagList += `\n\t\t<p>지역: ${location}</p>\n\t</a>\n</li>`;
+
+                        // console.log('- tagList:\n', tagList);
+
+                        // HTML Binding 수행
+                        $('#attractionListArea').html(tagList);
+                        $('#attractionListArea').listview('refresh');
+                    } // for
+
+                } // if
+
+            } // displayTour
+
+
+
+
+        }); // jq.
+
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <h1>세계 유명관광지 안내</h1>
+        </div>
+
+        <div data-role="content">
+            <ul data-role="listview" 
+                id="attractionListArea" data-theme="b">
+
+            </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>에이콘 관광</h4>
+        </div>    
+
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 이벤트 </title>  
+<script src="js/jquery.js"></script>
+<script>
+	$(function( ) {
+
+		//-------------------------------//
+		$(document).ready(function(){
+			console.log("- read 1.");
+		});
+		//-------------------------------//
+		$(document).ready(function(){
+			console.log("- read 2.");
+		});
+
+		//-------------------------------//
+		$(window).load(function(){
+			console.log("- load 1.");
+		});
+		//-------------------------------//
+		$(window).load(function(){
+			console.log("- load 2.");
+		});
+		//-------------------------------//
+
+	}); // end jq.
+</script>
+</head>
+<body>
+	<p>
+		<img src="http://place-hold.it/300X300" 
+			 class="img1">
+	</p>
+</body>
+</html>

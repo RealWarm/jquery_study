@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 선택자 </title>  
+<script src="js/jquery.js"></script>
+<script>
+	$(function(){
+
+		var obj = [
+			{"area":"서울"},	// { area: '서울'}
+			{"area":"부산"},	// { area: '부산'}
+			{"area":"전주"}		// { area: '전주'}
+		]; // JS 배열객체 생성: 원소는 각각 객체(object)임
+
+		//---------------------------------------//
+		// $(obj).each(function f_callback(index, element) {
+		// 	console.log(index + ":", element.area);
+		// }); // each
+
+		// console.log("==== The End 1 ====");
+		//---------------------------------------//
+
+		//---------------------------------------//
+		// $.each($("#menu2 li"), function(index, element) {
+		// 	console.log(index + ":", element);
+		// 	console.log(index + ":", element.area);
+		// }); // $.each
+
+		// console.log("==== The End 2 ====");
+		//---------------------------------------//    
+
+		//---------------------------------------//
+		// $.each($("#menu2 li"), function(index) {
+		// 	// $(this) : 배열의 각 요소(element)를 의미
+		// 	// console.log(index + ":", $(this));
+		// 	console.log('- this:', this);
+		// 	console.log('- $(this):', $(this));
+		// }); // $.each    
+		//---------------------------------------//   
+
+		//---------------------------------------//
+		$.each($("#menu2 li"), function() {
+			// console.log('- index:', index);		// X
+			// console.log('- this:', this);	// O
+			// console.log('- element:', element);	// O
+
+			console.log('- arguments:', arguments[1]);
+		}); // $.each
+		//---------------------------------------//  
+
+	}); // end jq
+</script>
+</head>
+<body>
+	<h1>탐색 선택자</h1>
+	
+	<ul id="menu1">
+		<li>내용1-1</li>
+		<li>내용1-2</li>
+		<li>내용1-3</li>
+	</ul>
+
+	<ul id="menu2">
+		<li>내용2-1</li>
+		<li>내용2-2</li>
+		<li>내용2-3</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sample3</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.css">
+
+    <!-- 필요한 jQuery / jQuery-migrate / jQuery-mobile lib 설정 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.1.0/jquery-migrate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.5/jquery.mobile.min.js"></script>
+
+    <script>
+        
+        $(function () {
+            
+            // 1. XML 버튼에 click 이벤트 등록
+            $('#btnLoad1').click(function () {
+
+                // 2. aJax 를 이용하여, 동일출처(SO)의 XML
+                //    문서파일을 받아오자!!!
+                $.ajax({
+                    url: 'resources/studentinfo.xml',
+                    type: 'GET',
+                    dataType: 'xml',
+                    timeout: 10000,
+                    success: function(xmlData) {
+                        console.log('- xmlData:\n', xmlData);
+
+                        // 3. 수신한 XML 문서를 파싱, 데이터추출
+                        //    하여, 기존 DOM Tree에 추가(바인딩)
+
+                        var tagList = "";   // <student> list
+                        
+                        var studentArray = $(xmlData).find('student');
+                        console.log('\t+ studentArray:', studentArray);
+
+                        $(studentArray).each(function (index, item) {
+                            console.log('\t+ index:', index);
+                            console.log('\t+ item:', item);
+
+                            tagList += "<li>"+$(item).find('gradepoint').text()+"</li>\n";
+                            
+                        }); // each
+
+                        console.log('\t+ tagList:\n', tagList);
+
+                        // 4. DOM tree binding 수행.
+                        $('#listArea').empty();
+                        $('#listArea').append(tagList);
+                        $('#listArea').listview('refresh');
+
+
+                    } // success
+                });
+            });
+
+            // 2. JSON 버튼에 click 이벤트 등록
+            $('#btnLoad2').on('click', function (){
+                
+                //2-1. aJax로 studentinfo.json 문서 얻어오기
+                // $.getJSON(url,[,data][,function(data)]);
+                $.getJSON('resources/studentinfo.json', function (jsonData) {
+                    console.log('- jsonData:', jsonData);
+
+                    var tagList = "";
+
+                    $.each(jsonData.stuinfo, function (index, item) {
+                        console.log('- index:', index);
+                        console.log('- item:', item);
+
+                        tagList = tagList.concat('<li>', item.student ,'</li>', '\n');
+                    });
+
+                    // 2-2. HTML Binding 수행(ul 태그에 추가)
+                    console.log('- tagList:', tagList);
+
+                    $('#listArea').empty();
+                    $('#listArea').append(tagList);
+                    $('#listArea').listview('refresh');
+
+                }); // $.getJSON
+
+            }); // on
+
+            // 3. HTML 버튼에 click 이벤트 등록
+            $('#btnLoad3').click(function () {
+                
+                $('#listArea').empty();
+                $('#listArea').load(
+                    'resources/studentinfo.html li',
+
+                    function (htmlData) {
+                        console.log('- htmlData:\n', htmlData);
+
+                        $('#listArea').listview('refresh');
+                    }
+                );  // aJax method
+
+            }); // click
+        }); // jq.
+    
+    </script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h1>aJax Sample 1</h1>
+        </div>
+
+        <div data-role="content">
+            <button id="btnLoad1" data-inline="true">XML</button>
+            <button id="btnLoad2" data-inline="true">JSON</button>
+            <button id="btnLoad3" data-inline="true">HTML</button>
+
+            <ul data-role="listview" id="listArea" data-inset="true">
+                <li id="item">Before data loading....</li>
+            </ul>            
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <h4>Footer</h4>
+        </div>
+    </div>
+</body>
+</html>

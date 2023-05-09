@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 이벤트 </title>  
+<script src="js/jquery.js"></script>
+<script>
+	$(function(){
+		//------------------------------------------//
+		// 이벤트를 등록하고, class 값을 추가해도,
+		// 이벤트가 정상적으로 동작되지 않음!!!
+		//------------------------------------------//
+		$(".btn_1.on").on("mouseover focus", function() {
+			alert("HELLO!");
+		}); // on.
+
+		$(".btn_1").addClass("on"); // class 값 추가!!
+		//------------------------------------------//
+
+		//------------------------------------------//
+		// 라이브 이벤트 등록방식으로 이벤트 등록 후,
+		// class 값을 추가하면, 이벤트가 정상적으로 작동
+		//------------------------------------------//
+		// ****** 라이브 이벤트 등록 기본형 *******
+		// $([document | Event Target 상위요소 선택]).
+		//  on('Event Types', 'Event Target', function(){});
+		//------------------------------------------//
+		console.log('- document:', document);
+		
+		$(document).on("mouseover focus", ".btn_2.on", 
+			function() {
+				alert("WELCOME!");
+		}); // on.
+
+		$(".btn_2").addClass("on"); // class 값 추가
+		//------------------------------------------//
+	}); // jq.
+</script>
+</head>
+<body>
+	<div id="wrap">
+		<p><button class="btn_1">버튼1</button></p>
+		<p><button class="btn_2">버튼2</button></p>
+	</div>
+</body>
+</html>

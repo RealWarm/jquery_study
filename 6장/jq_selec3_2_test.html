@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title> 객체 조작 및 생성 </title>  
+  <script src="js/jquery.js"></script>
+  <script>
+    $(function( ){
+
+      //----------------------------//
+      // $(selector).attr(속성명): (참조)
+      //   - 선택된 요소의 지정된 속성값을 참조(사용)
+      //----------------------------//
+      var srcVal = $("#sec_1 img").attr("src");
+      console.log(srcVal);
+
+      //----------------------------//
+      // $(selector).attr({ 속성명: 값, 속성명: 값,...}): (변경)
+      //   - 선택된 요소의 지정된 속성값에 새로운 값 적용
+      //----------------------------//
+      $("#sec_1 img").
+        attr({
+          "width":200,
+          "src": srcVal.replace("200","300"),
+          "alt": "바위"
+        }).
+        removeAttr("border");
+
+    }); // end jq.
+  </script>
+  </head>
+  <body>
+    <h1><strong>객체 조작 및 생성</strong></h1>
+    
+    <section id="sec_1">
+        <h2>이미지 속성</h2>
+
+        <p><img src="https://picsum.photos/200/200" 
+                alt="가위" 
+                border="1"></p>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 선택자 </title>  
+<script src="js/jquery.js"></script>
+<script>
+	$(function(){
+		var arr1 = [
+			{
+				"area":"area1", 
+				"name":"name1"
+			},
+			{
+				"area":"area2", 
+				"name":"name2"
+			},
+			{
+				"area":"area3", 
+				"name":"name3"
+			},
+			{
+				"area":"area4", 
+				"name":"name4"
+			}
+		]; // 새로운 배열객체 생성 및 변수에 저장
+
+		//---------------------------------------//
+		// var arr2 = $.map(arr1, function f_callback(item, index) {
+		// 	// if(item.area == "area1") {
+		// 	// 	return item.area;
+		// 	// } // if
+
+		// 	// return item.area;
+		// 	// return item.name;
+		// });
+
+		// console.log(arr2);
+		//---------------------------------------//
+
+		//---------------------------------------//
+		var arr3 = $.grep(arr1, function(item, index){
+			// if(item.area == "area3") {
+			// 	return true;
+			// } else {
+			// 	return false;
+			// } // if-else
+
+			// Predicate(filter condition)에 부합하는
+			// 원소만을, 새로운 배열의 원소로 넣어주는 함수	
+			return true;	// boolean: true(O), false(X)
+		}); // $.grep
+
+		console.log(arr3);
+		//---------------------------------------//
+	
+	}); // 배열 생성: 원소는 각각 JS 객체임.
+</script>
+</head>
+<body>
+</body>
+</html>

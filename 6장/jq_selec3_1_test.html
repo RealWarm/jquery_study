@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 객체 조작 및 생성 </title>  
+<script src="js/jquery.js"></script>
+<script>
+	$(function(){
+		//--------------------------------------//
+		// $(selector).html(): (참조)
+		//   - 선택된 요소의 하위요소를 가져옵니다.  
+		// $(selector).html('새로운 요소'): (생성)
+		//   - 선택된 요소의 하위요소를 모두 제거하고
+		//   - 그 위치에 새로운 요소를 생성.
+		//--------------------------------------//
+		// var result_1 = $("#sec_1").html( );
+		// console.log(result_1);
+
+		// $("#sec_1 p").html("<a href=\"#\">Text1</a>");
+		//--------------------------------------//
+
+		//--------------------------------------//
+		// $(selector).text(): (참조)
+		//   - 선택된 요소가 감싸는 모든 텍스트를 가져옵니다.  
+		// $(selector).text('새로운 텍스트'): (생성)
+		//   - 선택된 요소의 하위요소를 모두 제거하고
+		//   - 그 위치에 새로운 텍스트를 생성.
+		//--------------------------------------//
+		var result_2 = $("#sec_2").text( );
+		console.log(result_2);
+
+		$("#sec_2 h2").text("text()");
+		//--------------------------------------//
+	}); // end jq.
+</script>
+</head>
+<body>
+	<h1><strong>객체 조작 및 생성</strong></h1>
+
+	<section id="sec_1">
+		<h2><em>html()</em></h2>
+
+		<p>내용1</p>
+	</section>
+
+	<section id="sec_2">
+		<h2><em>텍스트()</em></h2>
+
+		<p>내용2</p>
+	</section>
+</body>
+</html>

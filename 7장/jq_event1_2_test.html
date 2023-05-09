@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> 이벤트 </title>
+<script src="js/jquery.js"></script>
+
+<script>
+	$(function( ) {
+		//---------------------------------//
+		// 1. 버튼에 단독 이벤트 핸들러 등록
+		//---------------------------------//
+		$(".btn1").click(function() {
+			$(".btn1").parent().next( )
+			.css({"color":"#f00"});
+		});
+		//---------------------------------//
+
+		//---------------------------------//
+		// 2. 버튼에 그룹 이벤트 핸들러 등록
+		//---------------------------------//
+		$(".btn2").on({
+			"mouseover focus": function() {
+				$(".btn2").parent().next( )
+				.css({"color":"#0f0"});
+			}
+		});
+
+		//---------------------------------//
+		// 3. 이벤트 강제발생(triggering)
+		//---------------------------------//
+		$(".btn1").click(); // click 이벤트 발생  
+		// mouseover 이벤트 발생
+		$(".btn2").trigger("mouseover");
+
+	}); // end jq.
+</script>
+
+</head>
+<body>
+	<p>
+		<button class="btn1">버튼1</button>
+	</p>
+
+	<p>내용1</p>
+
+	<p>
+		<button class="btn2">버튼2</button>
+	</p>
+	
+	<p>내용2</p>
+</body>
+</html>

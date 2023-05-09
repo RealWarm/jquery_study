@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<attractionList>
+
+    <attraction country="America">
+        <name>자유의 여신상</name>
+        <location>New York</location>
+        <picture>https://picsum.photos/500/700</picture>
+    </attraction>
+
+</attractionList>

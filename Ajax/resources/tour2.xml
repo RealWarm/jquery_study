@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<attractionList>
+
+    <attraction country="America">
+        <name>자유의 여신상</name>
+        <location>New York</location>
+        <picture>https://picsum.photos/400/200</picture>
+    </attraction>
+
+    <attraction country="Italia">
+        <name>콜로세움</name>
+        <location>Roma</location>
+        <picture>https://picsum.photos/400/200</picture>
+    </attraction>
+
+    <attraction country="United Kingdom">
+        <name>런던아이</name>
+        <location>London</location>
+        <picture>https://picsum.photos/400/200</picture>
+    </attraction>
+
+    <attraction country="France">
+        <name>에펠탑</name>
+        <location>Paris</location>
+        <picture>https://picsum.photos/400/200</picture>
+    </attraction>
+
+</attractionList>
